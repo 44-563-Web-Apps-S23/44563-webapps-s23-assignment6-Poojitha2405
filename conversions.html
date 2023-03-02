@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+ 
+<body>
+
+<h2>Poojitha Naradasu shows currency conversions</h2>
+
+<form>
+    <label for="base_element">Enter base amount </label>
+    <input class="form-control" type="number" id="base_element" name="base_element" value=50> <br>
+
+    <label for="conversion_element">Enter the conversion rate </label>
+    <input class="form-control" type="number" id="conversion_element" name="conversion_element" value=2> <br>
+
+    <button class="btn btn-primary" type="button" onclick="convert()">Show conversions</button>
+</form>
+<div id="number_result">This text will be replaced </div>
+<div class="container-fluid">
+    <form>
+        
+        <input type="radio" class="radio" id="rg1" name="color" value="mean"   
+          checked onclick="chooseOp()" >
+        <label for="rg1">average</label></br>
+      
+        <input type="radio" class="radio" id="rg2" name="color" 
+           value="maximum" onclick="chooseOp()">
+        <label for="rg2">max</label></br>
+      
+        <input type="radio" class="radio" id="rg3" name="color"   
+           value="minimum" onclick="chooseOp()">
+        <label for="rg3">min</label></br>
+        
+      </form>
+    </div>
+    <p id="number_results">This text will be replaced </p>
+
+<script> 
+function convert() {
+    console.log("Getting currency values")
+    fin = document.getElementById("base_element").value
+    sin = document.getElementById("conversion_element").value
+    var toShow = "";
+    var mul = 1;
+    for(var i=0;i<5;i++) {
+        let r=mul*sin*fin;
+        r=Math.round(r * 10) / 10;
+        
+        toShow+= " "+fin*mul+" is "+r+";"
+        mul*=2;
+    }
+    document.getElementById("number_result").innerHTML="Conversion are :"+toShow    
+}
+  function chooseOp(){
+   var fin = parseFloat(document.getElementById("base_element").value)
+   var sin = parseFloat(document.getElementById("conversion_element").value)
+    var temp="";
+    temp=document.getElementsByName("color")
+    var checkedValue = ""
+    for(i = 0; i < temp.length; i++){
+        if(temp[i].checked){
+            checkedValue = temp[i].value
+        }}   
+    switch(checkedValue){
+        case "minimum":
+            if(fin<sin){
+                document.getElementById("number_results").innerHTML="minimum of "+fin+ " and "+sin+" is "+fin;
+            }
+            else{
+                document.getElementById("number_results").innerHTML="minimum of "+fin+ " and "+sin+" is "+sin;
+            }break;           
+        case "maximum":
+            if(fin>sin){
+                document.getElementById("number_results").innerHTML="maximum of "+fin+ " and "+sin+" is "+fin;
+            }
+            else{
+                document.getElementById("number_results").innerHTML="maximum of "+fin+ " and "+sin+" is "+sin;
+            }break;           
+        case "mean":
+            document.getElementById("number_results").innerHTML="mean of "+fin+ " and "+sin+" is "+(fin+sin)/2;
+            break;
+    }
+    }
+</script>
+
+</body>
+</html> 

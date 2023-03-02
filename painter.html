@@ -17,9 +17,14 @@
     <input type="button" onclick="checkpainter()" value="Check the guess">
 </form>
 <p id="result">This text will be replaced</p>
+<div class="container">
+    <img src="Dandelions.jpg" id="select" onclick="selectImage()" width="100px" height="100px">
+</div>
 <script> 
 var good=0;
 var oops=0;
+var count=0;
+var useImage=1;
 function checkpainter (){
     console.log("Getting form values")
     hidden = document.getElementById("form1_hidden").value
@@ -28,12 +33,41 @@ function checkpainter (){
     if(hidden==guess){
         good=good+1;
         alert("You got it right");
-        out.innerHTML =good
-    } else {
+        result.innerHTML ="Good count is :"+good 
+    } 
+    else{ 
+        count+=1
+        if(count>10){
+            document.getElementById("btn").onclick=display()
+        }
+        else {
         oops=oops+1;
         alert("Sorry");
-        out.innerHTML =oops
+        result.innerHTML="Oops count is :"+oops
     }
+}}
+function display()
+    {
+        alert("Sorry, ran out of guesses")
+    }
+function selectImage(){
+
+switch (useImage) {
+  case 1:
+  document.getElementById("select").src = "Dandelions.jpg";
+  useImage=2;
+    break;
+  case 2:
+  document.getElementById("select").src = "rose.jpg";
+  useImage=3;
+    break;
+  case 3:
+  document.getElementById("select").src = "SunFlower.jpg";
+  useImage=1;
+    break;
+  
+}
+
 }
 </script>
 
